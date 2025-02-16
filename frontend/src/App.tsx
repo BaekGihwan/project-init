@@ -1,21 +1,8 @@
-import React, { useEffect, useState} from 'react';
-import axios from "axios";
-import './App.css';
+import {Router} from "./components/pages/Router";
 
 function App() {
-  const [data, setData] = useState('')
-
-  useEffect(() => {
-    axios.get('/api/hello')
-        .then(response => setData(response.data))
-        .catch(error => console.log(error))
-  }, []);
-
-  return (
-    <div className="App">
-      백엔드 데이터 : {data}
-    </div>
-  );
+    console.log("REACT_APP_SOS_API_URL:", process.env.REACT_APP_SOS_API_URL);
+    return <Router/>
 }
 
 export default App;

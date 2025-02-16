@@ -6,7 +6,7 @@ spring:
     name: sos-api
   config:
     activate:
-      on-profile: prod
+      on-profile: local
   jpa:
     database-platform: org.hibernate.dialect.OracleDialect
     hibernate:
