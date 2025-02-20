@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
+import React from "react";
 
 interface ContainerProps {
   color: string;
   width?: string;
   height?: string;
+  style?: React.CSSProperties;
 }
 
-const Container = styled.button<ContainerProps>`
+export const Container = styled.button<ContainerProps>`
   margin-top: 15px;
   padding: 8px 16px;
   background-color: ${(props) => props.color};
@@ -20,6 +22,7 @@ const Container = styled.button<ContainerProps>`
   font-size: 18px;
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  ${props => props.style && Object.entries(props.style).map(([key, value]) => `${key}: ${value};`).join(' ')}
 
   &:hover {
     background-color: ${(props) => props.color};
@@ -37,11 +40,12 @@ interface Props {
   readonly onClick?: () => void;
   readonly width?: string;
   readonly height?: string;
+  readonly style?: React.CSSProperties;
 }
 
-export const Button = ({ label, color = '#ff5722', onClick, width = '100px', height = '40px' }: Props) => {
+export const Button = ({ label, color = '#ff5722', onClick, width = '100px', height = '40px', style }: Props) => {
   return (
-      <Container color={color} onClick={onClick} width={width} height={height}>
+      <Container color={color} onClick={onClick} width={width} height={height} style={style}>
         {label}
       </Container>
   );

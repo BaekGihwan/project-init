@@ -15,12 +15,17 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
+const logoStyle: React.CSSProperties = {
+    width: '100%',
+    height: '100%'
+}
+
 export const LoginPage = () => {
     const [form, setForm] = useState({
         id: '',
-        password: '',
+        pwd: '',
     });
-    const {id, password} = form;
+    const {id, pwd} = form;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target;
@@ -34,12 +39,12 @@ export const LoginPage = () => {
         e?.preventDefault();
         if (id === '') {
             window.alert('아이디를 입력해주세요');
-        } else if (password === '') {
+        } else if (pwd === '') {
             window.alert('비밀번호를 입력해주세요');
         } else {
         const params = {
             id: id,
-            password: encode(password)
+            pwd: encode(pwd)
         }
 
         axios.post(`${process.env.REACT_APP_SOS_API_URL}/login`, params)
@@ -63,12 +68,12 @@ export const LoginPage = () => {
 
     return (
         <Wrapper>
-            <Container className="imageGroup">
-                <Image src={logo} alt='로고' width='100%' height='100%'></Image>
+            <Container className="logoGroup">
+                <Image src={logo} alt='로고' style={logoStyle} ></Image>
             </Container>
             <Container className="inputGroup">
                 <TextField name="id" value={id} label="아이디" type="text" variant="standard" onChange={handleChange} onKeyDown={handleKeyDown} fullWidth autoFocus/>
-                <TextField name="password" value={password} label="비밀번호" type="password" variant="standard" onChange={handleChange} onKeyDown={handleKeyDown} fullWidth/>
+                <TextField name="password" value={pwd} label="비밀번호" type="password" variant="standard" onChange={handleChange} onKeyDown={handleKeyDown} fullWidth/>
             </Container>
             <Container className='buttonGroup'>
                 <Button label="Login" color='#668fb8' width='100%' height='40px' onClick={handleLoginClick}/>

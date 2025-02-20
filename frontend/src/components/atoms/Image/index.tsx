@@ -4,33 +4,29 @@ import styled from '@emotion/styled';
 export interface ImageProps {
     src: string;
     alt: string;
-    width?: number | string;
-    height?: number | string;
     objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+    style?: React.CSSProperties;
 }
 
 export const Image = styled.img<ImageProps>`
-  width: ${props => props.width || 'auto'};
-  height: ${props => props.height || 'auto'};
   object-fit: ${props => props.objectFit || 'cover'};
   pointer-events: none;
+  ${props => props.style && Object.entries(props.style).map(([key, value]) => `${key}: ${value};`).join(' ')}
 `;
 
 export const ImageComponent: React.FC<ImageProps> = ({
                                                          src,
                                                          alt,
-                                                         width,
-                                                         height,
                                                          objectFit,
+                                                         style,
                                                          ...rest
                                                      }) => {
     return (
         <Image
             src={src}
             alt={alt}
-            width={width}
-            height={height}
             objectFit={objectFit}
+            style={style}
             {...rest}
         />
     );
